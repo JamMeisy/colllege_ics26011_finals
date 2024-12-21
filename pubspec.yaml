@@ -55,7 +55,7 @@ dev_dependencies:
   flutter_launcher_icons: ^0.14.2
 flutter_icons:
   android: "launcher_icon"
-  image_path: "asset/icons/bookify.png"
+  image_path: "assets/icons/bookify.png"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
