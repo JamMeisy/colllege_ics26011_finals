@@ -25,13 +25,9 @@ class ViewEventList extends StatelessWidget {
         title: Text(
           'Thomasian Posts',
           style: TextStyle(
-            color: AppColors.secondary,
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: AppColors.primary,
-        elevation: 0,
-        iconTheme: IconThemeData(color: AppColors.secondary),
       ),
       drawer: MyDrawer(),
       body: ApprovedEventList(),
@@ -133,7 +129,7 @@ class ApprovedEventList extends StatelessWidget {
             itemCount: documents.length,
             itemBuilder: (context, index) {
               final Map<String, dynamic> data =
-              documents[index].data() as Map<String, dynamic>;
+                  documents[index].data() as Map<String, dynamic>;
 
               return Hero(
                 tag: 'event-${documents[index].id}',
@@ -170,6 +166,15 @@ class ApprovedEventList extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          data['imageURL'] != null
+                              ? Image.network(
+                                  data['imageURL'],
+                                  height: 150,
+                                  width: double.infinity,
+                                  fit: BoxFit.cover,
+                                )
+                              : SizedBox.shrink(),
+                          SizedBox(height: 8),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -196,7 +201,8 @@ class ApprovedEventList extends StatelessWidget {
                                         SizedBox(width: 4),
                                         Expanded(
                                           child: Text(
-                                            data['venue'] ?? 'No venue specified',
+                                            data['venue'] ??
+                                                'No venue specified',
                                             style: TextStyle(
                                               color: AppColors.textSecondary,
                                               fontSize: 14,

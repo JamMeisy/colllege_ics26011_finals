@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
+import 'package:thomasian_post/screens/admin/admin_pending_events.dart';
 import 'package:thomasian_post/widgets/drawer.dart';
 import 'package:thomasian_post/screens/events/my_events.dart';
 
@@ -56,6 +57,29 @@ class _AdminViewEventState extends State<AdminViewEvent> {
       Navigator.pop(context);
     } catch (e) {
       print('Error updating event state: $e');
+    }
+  }
+
+  Future<String?> _getImageUrl(String? eventId) async {
+    try {
+      if (eventId != null) {
+        DocumentSnapshot eventSnapshot = await FirebaseFirestore.instance
+            .collection('Bookings')
+            .doc(eventId)
+            .get();
+
+        if (eventSnapshot.exists) {
+          Map<String, dynamic> eventData =
+              eventSnapshot.data() as Map<String, dynamic>;
+          return eventData['imageURL'] as String?;
+        } else {
+          print('Document with event ID $eventId does not exist.');
+        }
+      }
+      return null;
+    } catch (e) {
+      print('Error fetching poster URL: $e');
+      return null;
     }
   }
 
@@ -230,7 +254,7 @@ class _AdminViewEventState extends State<AdminViewEvent> {
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => MyEventsPage(),
+                                  builder: (context) => PendingEventsPage(),
                                 ),
                               );
                             },

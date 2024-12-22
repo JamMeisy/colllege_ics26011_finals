@@ -116,9 +116,7 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   Future<void> _storeUserInFirestore(String email) async {
-    // Set isAdmin to false by default
     bool isAdmin = false;
-
     // Check if the user should have admin access based on your criteria
     if (_checkIfUserIsAdmin(email)) {
       isAdmin = true;
@@ -133,9 +131,8 @@ class _SignUpPageState extends State<SignUpPage> {
     });
   }
 
+  // NOTE: Qualifications for admins
   bool _checkIfUserIsAdmin(String email) {
-    // Implement your logic to determine if the user should be an admin
-    // For example, check if the email domain is admin@example.com
     return email.endsWith('@admin.com');
   }
 
@@ -143,7 +140,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Register'),
+        title: Text('Sign Up'),
       ),
       drawer: MyDrawer(),
       body: DoubleBackToCloseApp(
@@ -154,7 +151,7 @@ class _SignUpPageState extends State<SignUpPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Register",
+                  "Sign Up to Thomasian Post",
                   style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 25,
@@ -215,6 +212,15 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 ElevatedButton(
                   onPressed: _signUp,
+                  style: ButtonStyle(
+                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
+                    ),
+                    backgroundColor:
+                        WidgetStateProperty.all<Color>(Colors.deepPurple),
+                  ),
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                     child: _loading

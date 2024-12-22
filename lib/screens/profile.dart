@@ -1,4 +1,3 @@
-import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:thomasian_post/widgets/drawer.dart';
@@ -32,7 +31,8 @@ class _ProfilePageState extends State<ProfilePage> {
         user = _auth.currentUser;
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to reload user data: ${e.toString()}')),
+          SnackBar(
+              content: Text('Failed to reload user data: ${e.toString()}')),
         );
       }
     }
@@ -53,7 +53,10 @@ class _ProfilePageState extends State<ProfilePage> {
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to sign out: ${e.toString()}')),
+        SnackBar(
+          content: Text('Failed to sign out: ${e.toString()}'),
+          duration: const Duration(seconds: 1),
+        ),
       );
     } finally {
       setState(() => _isLoading = false);
@@ -77,66 +80,55 @@ class _ProfilePageState extends State<ProfilePage> {
         ],
       ),
       drawer: const MyDrawer(),
-      body: DoubleBackToCloseApp(
-        child: SafeArea(
-          child: Center(
-            child: FutureBuilder<User?>(
-              future: _userFuture,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const CircularProgressIndicator();
-                }
-
-                if (snapshot.hasError) {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(Icons.error_outline, size: 48, color: Colors.red),
-                      const SizedBox(height: 16),
-                      Text(
-                        'Error: ${snapshot.error}',
-                        style: const TextStyle(color: Colors.red),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          setState(() {
-                            _userFuture = _reloadUser();
-                          });
-                        },
-                        child: const Text('Retry'),
-                      ),
-                    ],
-                  );
-                }
-
-                if (!snapshot.hasData || snapshot.data == null) {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(Icons.person_off, size: 64, color: Colors.grey),
-                      const SizedBox(height: 16),
-                      const Text(
-                        'Not signed in',
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(height: 24),
-                      ElevatedButton.icon(
-                        icon: const Icon(Icons.login),
-                        label: const Text('Sign In'),
-                        onPressed: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (context) => LoginPage()),
-                          );
-                        },
-                      ),
-                    ],
-                  );
-                }
-
+      body: SafeArea(
+        child: Center(
+          child: FutureBuilder<User?>(
+            future: _userFuture,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const CircularProgressIndicator();
+              }
+              if (snapshot.hasError) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.error_outline,
+                        size: 48, color: Colors.red),
+                    const SizedBox(height: 16),
+                    Text(
+                      'Error: ${snapshot.error}',
+                      style: const TextStyle(color: Colors.red),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        setState(() {
+                          _userFuture = _reloadUser();
+                        });
+                      },
+                      child: const Text('Retry'),
+                    ),
+                  ],
+                );
+              } else if (!snapshot.hasData || snapshot.data == null) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text('User not signed in'),
+                    const SizedBox(height: 8),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => LoginPage()),
+                        );
+                      },
+                      child: const Text('Login'),
+                    ),
+                  ],
+                );
+              } else {
                 User user = snapshot.data!;
-                String username = _extractUsername(user.email ?? "default@default.com");
-
+                String username = _extractUsername(user.email!);
                 return RefreshIndicator(
                   onRefresh: () => _reloadUser(),
                   child: SingleChildScrollView(
@@ -149,26 +141,28 @@ class _ProfilePageState extends State<ProfilePage> {
                           children: [
                             CircleAvatar(
                               radius: 60,
-                              backgroundColor: Theme.of(context).primaryColor.withOpacity(0.1),
+                              backgroundColor: Theme.of(context)
+                                  .primaryColor
+                                  .withOpacity(0.1),
                               child: user.photoURL != null
                                   ? ClipOval(
-                                child: Image.network(
-                                  user.photoURL!,
-                                  width: 120,
-                                  height: 120,
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (_, __, ___) => Icon(
-                                    Icons.person,
-                                    size: 60,
-                                    color: Theme.of(context).primaryColor,
-                                  ),
-                                ),
-                              )
+                                      child: Image.network(
+                                        user.photoURL!,
+                                        width: 120,
+                                        height: 120,
+                                        fit: BoxFit.cover,
+                                        errorBuilder: (_, __, ___) => Icon(
+                                          Icons.person,
+                                          size: 60,
+                                          color: Theme.of(context).primaryColor,
+                                        ),
+                                      ),
+                                    )
                                   : Icon(
-                                Icons.person,
-                                size: 60,
-                                color: Theme.of(context).primaryColor,
-                              ),
+                                      Icons.person,
+                                      size: 60,
+                                      color: Theme.of(context).primaryColor,
+                                    ),
                             ),
                             CircleAvatar(
                               radius: 18,
@@ -179,7 +173,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                 onPressed: () {
                                   // TODO: Implement profile picture update
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(content: Text('Profile picture update coming soon!')),
+                                    const SnackBar(
+                                        content: Text(
+                                            'Profile picture update coming soon!')),
                                   );
                                 },
                               ),
@@ -208,7 +204,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           onPressed: () {
                             Navigator.pushReplacement(
                               context,
-                              MaterialPageRoute(builder: (context) => MyEventsPage()),
+                              MaterialPageRoute(
+                                  builder: (context) => MyEventsPage()),
                             );
                           },
                         ),
@@ -219,7 +216,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           onPressed: () {
                             // TODO: Implement settings page
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Settings page coming soon!')),
+                              const SnackBar(
+                                  content: Text('Settings page coming soon!')),
                             );
                           },
                         ),
@@ -230,7 +228,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           onPressed: () {
                             // TODO: Implement help page
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Help page coming soon!')),
+                              const SnackBar(
+                                  content: Text('Help page coming soon!')),
                             );
                           },
                         ),
@@ -238,15 +237,15 @@ class _ProfilePageState extends State<ProfilePage> {
                         _isLoading
                             ? const CircularProgressIndicator()
                             : ElevatedButton.icon(
-                          icon: const Icon(Icons.logout),
-                          label: const Text('Sign Out'),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.red,
-                            foregroundColor: Colors.white,
-                            minimumSize: const Size(200, 45),
-                          ),
-                          onPressed: _handleSignOut,
-                        ),
+                                icon: const Icon(Icons.logout),
+                                label: const Text('Sign Out'),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.red,
+                                  foregroundColor: Colors.white,
+                                  minimumSize: const Size(200, 45),
+                                ),
+                                onPressed: _handleSignOut,
+                              ),
                         const SizedBox(height: 16),
                         TextButton.icon(
                           icon: const Icon(Icons.home),
@@ -254,7 +253,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           onPressed: () {
                             Navigator.pushReplacement(
                               context,
-                              MaterialPageRoute(builder: (context) => ViewEventList()),
+                              MaterialPageRoute(
+                                  builder: (context) => ViewEventList()),
                             );
                           },
                         ),
@@ -262,12 +262,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                 );
-              },
-            ),
+              }
+            },
           ),
-        ),
-        snackBar: const SnackBar(
-          content: Text('Tap back again to leave'),
         ),
       ),
     );

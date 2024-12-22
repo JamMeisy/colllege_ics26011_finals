@@ -23,7 +23,7 @@ class ViewEvent extends StatelessWidget {
     this.link,
   }) : super(key: key);
 
-  Future<String?> _getPosterUrl(String? eventId) async {
+  Future<String?> _getImageUrl(String? eventId) async {
     try {
       if (eventId != null) {
         DocumentSnapshot eventSnapshot = await FirebaseFirestore.instance
@@ -34,7 +34,7 @@ class ViewEvent extends StatelessWidget {
         if (eventSnapshot.exists) {
           Map<String, dynamic> eventData =
               eventSnapshot.data() as Map<String, dynamic>;
-          return eventData['poster'] as String?;
+          return eventData['imageURL'] as String?;
         } else {
           print('Document with event ID $eventId does not exist.');
         }
@@ -70,7 +70,7 @@ class ViewEvent extends StatelessWidget {
               ),
               SizedBox(height: 15),
               FutureBuilder<String?>(
-                future: _getPosterUrl(eventId), // Pass eventId to _getPosterUrl
+                future: _getImageUrl(eventId),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return CircularProgressIndicator();

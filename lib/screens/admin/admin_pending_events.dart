@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:thomasian_post/screens/admin/admin_view_event.dart';
 import 'package:thomasian_post/utils/admin_utils.dart';
 import 'package:thomasian_post/utils/color_utils.dart';
+import 'package:thomasian_post/widgets/drawer.dart';
 
 class PendingEventsPage extends StatefulWidget {
   const PendingEventsPage({Key? key}) : super(key: key);
@@ -32,18 +33,14 @@ class _PendingEventsPageState extends State<PendingEventsPage> {
     });
 
     try {
-      if (!isAdmin) {
-        print('Unauthorized Access');
-      } else {
-        QuerySnapshot querySnapshot = await _firestore
-            .collection('Bookings')
-            .orderBy('timestamp', descending: true)
-            .get();
+      QuerySnapshot querySnapshot = await _firestore
+          .collection('Bookings')
+          .orderBy('timestamp', descending: true)
+          .get();
 
-        setState(() {
-          bookings = querySnapshot.docs;
-        });
-      }
+      setState(() {
+        bookings = querySnapshot.docs;
+      });
     } catch (e) {
       print('Error fetching events: $e');
     }
@@ -66,6 +63,7 @@ class _PendingEventsPageState extends State<PendingEventsPage> {
       appBar: AppBar(
         title: Text('Pending Events'),
       ),
+      drawer: MyDrawer(),
       body: SafeArea(
         child: RefreshIndicator(
           onRefresh: _fetchAllEvents,
@@ -91,7 +89,7 @@ class _PendingEventsPageState extends State<PendingEventsPage> {
               }
               // Case 2: Display all events
               else if (index < bookings.length) {
-                var booking = bookings[index].data() as Map<String, dynamic>;
+                var data = bookings[index].data() as Map<String, dynamic>;
 
                 // Swipe to remove
                 return Dismissible(
@@ -172,44 +170,57 @@ class _PendingEventsPageState extends State<PendingEventsPage> {
                         ),
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      child: Column(
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          data['imageURL'] != null
+                              ? Image.network(
+                                  data['imageURL'],
+                                  height: 150,
+                                  width: double.infinity,
+                                  fit: BoxFit.cover,
+                                )
+                              : SizedBox.shrink(),
+                          SizedBox(height: 8),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                booking['eventName'] ?? '',
-                                style: TextStyle(fontSize: 18),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    data['eventName'] ?? '',
+                                    style: TextStyle(fontSize: 18),
+                                  ),
+                                  Text(
+                                    data['venue'] ?? '',
+                                    style: TextStyle(color: Color(0xffadadad)),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                booking['venue'] ?? '',
-                                style: TextStyle(color: Color(0xffadadad)),
-                              ),
+                              Container(
+                                width: 100,
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 8, horizontal: 12),
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: ColorUtils.getStatusBorderColor(
+                                        data['state']),
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                child: Text(
+                                  data['state']?.toUpperCase() ?? 'UNKNOWN',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: ColorUtils.getStatusBorderColor(
+                                        data['state']),
+                                  ),
+                                ),
+                              )
                             ],
                           ),
-                          Container(
-                            width: 100,
-                            padding: EdgeInsets.symmetric(
-                                vertical: 8, horizontal: 12),
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: ColorUtils.getStatusBorderColor(
-                                    booking['state']),
-                                width: 1,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            child: Text(
-                              booking['state']?.toUpperCase() ?? 'UNKNOWN',
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: ColorUtils.getStatusBorderColor(
-                                    booking['state']),
-                              ),
-                            ),
-                          )
                         ],
                       ),
                     ),

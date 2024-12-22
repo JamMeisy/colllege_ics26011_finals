@@ -1,7 +1,6 @@
-import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:thomasian_post/screens/events/create_event.dart';
+import 'package:thomasian_post/screens/events/my_events.dart';
 import 'package:thomasian_post/widgets/drawer.dart';
 import 'package:thomasian_post/screens/auth/signup.dart';
 
@@ -44,15 +43,14 @@ class _LoginPageState extends State<LoginPage> {
   Future<void> _signInWithEmailAndPassword() async {
     try {
       if (!_isMounted) {
-        return; // Check if the widget is still mounted
+        return;
       }
 
       setState(() {
-        _loading = true; // Set loading state for email/password sign-in
+        _loading = true;
       });
 
       if (usernameController.text.isEmpty || passwordController.text.isEmpty) {
-        // Check if username or password is empty
         _showSnackBar('Username and password are required');
         return;
       }
@@ -62,16 +60,15 @@ class _LoginPageState extends State<LoginPage> {
         password: passwordController.text,
       );
 
+      // User signed in successfully
       User? user = userCredential.user;
       if (user != null && _isMounted) {
-        // User signed in successfully
         _showSnackBar('Signed in as ${user.email}');
 
-        // Navigate to BookingPage
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => CreateEvent(),
+            builder: (context) => MyEventsPage(),
           ),
         );
       } else {
@@ -97,6 +94,7 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
+  // TODO: Design Here
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,121 +102,113 @@ class _LoginPageState extends State<LoginPage> {
         title: Text('Login'),
       ),
       drawer: MyDrawer(),
-      body: DoubleBackToCloseApp(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(30.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Log in",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 25,
-                      color: Colors.deepPurple),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                TextField(
-                  controller: usernameController,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(12))),
-                      hintText: 'username',
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 15, vertical: 10)),
-                ),
-                SizedBox(
-                  height: 12,
-                ),
-                TextFormField(
-                  controller: passwordController,
-                  decoration: InputDecoration(
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(30.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Log in",
+                style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 25,
+                    color: Colors.deepPurple),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              TextField(
+                controller: usernameController,
+                decoration: InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(12))),
-                    hintText: 'password',
+                    hintText: 'Username',
                     contentPadding:
-                        EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                    suffixIcon: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _obscurePassword = !_obscurePassword;
-                        });
-                      },
-                      child: Icon(
-                        _obscurePassword
-                            ? Icons.visibility
-                            : Icons.visibility_off,
-                      ),
+                        EdgeInsets.symmetric(horizontal: 15, vertical: 10)),
+              ),
+              SizedBox(
+                height: 12,
+              ),
+              TextFormField(
+                controller: passwordController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(12))),
+                  hintText: 'Password',
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  suffixIcon: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _obscurePassword = !_obscurePassword;
+                      });
+                    },
+                    child: Icon(
+                      _obscurePassword
+                          ? Icons.visibility
+                          : Icons.visibility_off,
                     ),
                   ),
-                  obscureText: _obscurePassword,
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    TextButton(
-                      onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SignUpPage(),
-                          )),
-                      child: Text(
-                        "Register Now",
-                        style: TextStyle(fontSize: 16),
-                      ),
+                obscureText: _obscurePassword,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TextButton(
+                    onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SignUpPage(),
+                        )),
+                    child: Text(
+                      "Sign up",
+                      style: TextStyle(fontSize: 16),
                     ),
-                    ElevatedButton(
-                      onPressed: _signInWithEmailAndPassword,
-                      style: ButtonStyle(
-                        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
+                  ),
+                  ElevatedButton(
+                    onPressed: _signInWithEmailAndPassword,
+                    style: ButtonStyle(
+                      shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12.0),
                         ),
-                        backgroundColor:
-                            WidgetStateProperty.all<Color>(Colors.deepPurple),
                       ),
-                      child: Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                        child: _loading
-                            ? SizedBox(
-                                width: 20,
-                                height: 20,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    Colors.white,
-                                  ),
-                                ),
-                              )
-                            : Text(
-                                "Sign in",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 16,
+                      backgroundColor:
+                          WidgetStateProperty.all<Color>(Colors.deepPurple),
+                    ),
+                    child: Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                      child: _loading
+                          ? SizedBox(
+                              width: 20,
+                              height: 20,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  Colors.white,
                                 ),
                               ),
-                      ),
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 12,
-                ),
-              ],
-            ),
+                            )
+                          : Text(
+                              "Log in",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16,
+                              ),
+                            ),
+                    ),
+                  )
+                ],
+              ),
+            ],
           ),
-        ),
-        snackBar: SnackBar(
-          content: Text('Tap back again to leave'),
         ),
       ),
     );

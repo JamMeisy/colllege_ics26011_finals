@@ -1,3 +1,8 @@
+## Notes
+
+Email sign up ending with '@admin.com' have admin access
+Images should be referenced with a valid image URL, not an image file.
+
 # Venue Booking App
 
 The Venue Booking App is a Flutter project designed to streamline the process of booking venues for events. Whether it's a seminar, presentation, or any other event, this app provides a user-friendly interface for users to schedule and manage their bookings.

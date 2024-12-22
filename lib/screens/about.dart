@@ -37,15 +37,15 @@ class AboutPage extends StatelessWidget {
             SizedBox(height: 16),
             DeveloperInfo(
               name: 'Jam Meisy F. Tan',
-              imageUrl: 'assets/images/developer1.png',
+              imageUrl: 'assets/images/jam.png',
             ),
             DeveloperInfo(
               name: 'Wilmargherix M. Castañeda',
-              imageUrl: 'assets/profile/rix.jpg',
+              imageUrl: 'assets/images/rix.jpg',
             ),
             DeveloperInfo(
               name: 'Raphael Angelo F. Dacayo',
-              imageUrl: 'assets/images/developer3.png',
+              imageUrl: 'assets/images/raph.png',
             ),
           ],
         ),
