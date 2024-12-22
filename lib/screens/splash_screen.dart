@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     Future.delayed(
       const Duration(seconds: 5),
-      () {
+          () {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (_) => widget.child ?? const Scaffold()),
         );
@@ -49,22 +49,13 @@ class _SplashScreenState extends State<SplashScreen>
         child: Container(
           width: double.infinity,
           height: double.infinity,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-              colors: [
-                Theme.of(context).primaryColor,
-                Theme.of(context).primaryColor.withOpacity(0.5),
-              ],
-            ),
-          ),
+          color: Colors.white, // Set background color to white
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                width: 100,
-                height: 100,
+                width: 300,
+                height: 300,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   shape: BoxShape.circle,
@@ -76,23 +67,15 @@ class _SplashScreenState extends State<SplashScreen>
                     ),
                   ],
                 ),
-                child: const Icon(
-                  Icons.android, // TODO: Replace with your app icon
-                  size: 60,
-                ),
-              ),
-              const SizedBox(height: 20),
-              const Text(
-                'My App',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                child: Image.asset(
+                  'assets/icons/logo.png',
+                  width: 200,
+                  height: 200,
                 ),
               ),
               const SizedBox(height: 20),
               const CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
               ),
             ],
           ),
