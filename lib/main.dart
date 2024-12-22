@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:thomasian_post/screens/home_page.dart';
+import 'package:thomasian_post/screens/my_events.dart';
 import 'package:thomasian_post/screens/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         fontFamily: GoogleFonts.inter().fontFamily,
         useMaterial3: true,
       ),
-      home: SplashScreen(child: HomePage()),
+      home: SplashScreen(child: EventsPage()),
     );
   }
 }
