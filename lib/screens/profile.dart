@@ -75,20 +75,14 @@ class _ProfilePageState extends State<ProfilePage> {
                   User user = snapshot.data!;
                   String username =
                       _extractUsername(user.email ?? "default@default.com");
-
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // TODO: REMOVE THIS
-                      Image.network(
-                          'https://next-images.123rf.com/index/_next/image/?url=https://assets-cdn.123rf.com/index/static/assets/top-section-bg.jpeg&w=3840&q=75'),
-
                       CircleAvatar(
                         radius: 60,
                         backgroundColor: Colors.grey[300],
                         child: Icon(Icons.person,
-                            size: 60,
-                            color: Colors.deepPurple), // Default profile icon
+                            size: 60, color: Colors.deepPurple),
                       ),
                       SizedBox(height: 20),
                       Text(
@@ -102,7 +96,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
-                                  EventsPage(), // Navigate to HomePage
+                                  MyEventsPage(), // Navigate to HomePage
                             ),
                           );
                         },

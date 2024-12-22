@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         fontFamily: GoogleFonts.inter().fontFamily,
         useMaterial3: true,
       ),
-      home: SplashScreen(child: EventsPage()),
+      home: SplashScreen(child: MyEventsPage()),
     );
   }
 }

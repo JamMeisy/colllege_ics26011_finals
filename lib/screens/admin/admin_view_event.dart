@@ -6,26 +6,24 @@ import 'package:thomasian_post/widgets/drawer.dart';
 import 'package:thomasian_post/screens/events/my_events.dart';
 
 // For Admin View
-class AdminEventList extends StatefulWidget {
+class AdminViewEvent extends StatefulWidget {
   final String eventId;
   final bool isAdmin;
 
-  const AdminEventList({Key? key, required this.eventId, required this.isAdmin})
+  const AdminViewEvent({Key? key, required this.eventId, required this.isAdmin})
       : super(key: key);
 
   @override
-  _AdminEventListState createState() => _AdminEventListState();
+  _AdminViewEventState createState() => _AdminViewEventState();
 }
 
-class _AdminEventListState extends State<AdminEventList> {
+class _AdminViewEventState extends State<AdminViewEvent> {
   late Map<String, dynamic> eventData;
 
   @override
   void initState() {
     super.initState();
-    // Initialize eventData to an empty map
     eventData = {};
-    // Fetch event details when the page is initialized
     _fetchEventDetails();
   }
 
@@ -55,12 +53,7 @@ class _AdminEventListState extends State<AdminEventList> {
       await _fetchEventDetails();
 
       // Navigate back to the homepage and replace the current page
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => EventsPage(),
-        ),
-      );
+      Navigator.pop(context);
     } catch (e) {
       print('Error updating event state: $e');
     }
@@ -237,7 +230,7 @@ class _AdminEventListState extends State<AdminEventList> {
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => EventsPage(),
+                                  builder: (context) => MyEventsPage(),
                                 ),
                               );
                             },

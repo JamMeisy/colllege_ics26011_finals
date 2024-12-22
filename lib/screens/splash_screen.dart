@@ -8,7 +8,8 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -26,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
     Future.delayed(
       const Duration(seconds: 5),
-          () {
+      () {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (_) => widget.child ?? const Scaffold()),
         );
@@ -76,7 +77,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                   ],
                 ),
                 child: const Icon(
-                  Icons.android,
+                  Icons.android, // TODO: Replace with your app icon
                   size: 60,
                 ),
               ),

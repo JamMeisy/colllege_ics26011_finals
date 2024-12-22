@@ -1,11 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:thomasian_post/screens/events/discover_events.dart';
 import 'package:thomasian_post/screens/events/my_events.dart';
+import 'package:thomasian_post/screens/admin/admin_pending_events.dart';
 import 'package:thomasian_post/screens/profile.dart';
 import 'package:thomasian_post/screens/about.dart';
+import 'package:thomasian_post/utils/admin_utils.dart';
 
-class MyDrawer extends StatelessWidget {
+class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});
+
+  @override
+  _MyDrawerState createState() => _MyDrawerState();
+}
+
+class _MyDrawerState extends State<MyDrawer> {
+  bool isAdmin = false;
+
+  Future<void> _checkAdminStatus() async {
+    bool adminStatus = await AdminUtils.checkIfAdmin();
+    setState(() {
+      isAdmin = adminStatus;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _checkAdminStatus();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +61,22 @@ class MyDrawer extends StatelessWidget {
               style: TextStyle(fontSize: 18),
             ),
             onTap: () => Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => EventsPage())),
+                MaterialPageRoute(builder: (context) => MyEventsPage())),
           ),
+          if (isAdmin)
+            ListTile(
+              leading: Icon(
+                Icons.pending,
+                color: Colors.deepPurple,
+                size: 24,
+              ),
+              title: Text(
+                'Pending Events',
+                style: TextStyle(fontSize: 18),
+              ),
+              onTap: () => Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => PendingEventsPage())),
+            ),
           ListTile(
             leading: Icon(
               Icons.person,
