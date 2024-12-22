@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:scroll_datetime_picker/scroll_datetime_picker.dart';
 import 'package:thomasian_post/widgets/drawer.dart';
-import 'package:thomasian_post/screens/my_events.dart';
-import 'package:thomasian_post/screens/discover_events.dart';
+import 'package:thomasian_post/screens/events/my_events.dart';
+import 'package:thomasian_post/screens/events/discover_events.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -23,15 +23,16 @@ class _CreateEventState extends State<CreateEvent> {
   DateTime selectedDate = DateTime.now();
   TimeOfDay selectedTime = TimeOfDay.now();
   TimeOfDay endTime = TimeOfDay(hour: 16, minute: 0);
-  bool showDatePicker = false;
-  bool showTimePicker = false;
-  bool showEndTimePicker = false;
 
   String selectedVenue = 'Audio Visual Theatre';
   File? _image;
   TextEditingController _eventNameController = TextEditingController();
   TextEditingController _eventDescriptionController = TextEditingController();
   TextEditingController _registerLinkController = TextEditingController();
+
+  bool showDatePicker = false;
+  bool showTimePicker = false;
+  bool showEndTimePicker = false;
   bool _isSubmitting = false;
   bool _isEventNameEmpty = true;
   File? _posterImage;

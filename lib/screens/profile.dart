@@ -2,9 +2,9 @@ import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:thomasian_post/widgets/drawer.dart';
-import 'package:thomasian_post/screens/my_events.dart';
-import 'package:thomasian_post/screens/login_page.dart';
-import 'package:thomasian_post/screens/discover_events.dart'; // Import the AllEvents page
+import 'package:thomasian_post/screens/events/my_events.dart';
+import 'package:thomasian_post/screens/auth/login.dart';
+import 'package:thomasian_post/screens/events/discover_events.dart'; // Import the AllEvents page
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -79,6 +79,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      // TODO: REMOVE THIS
+                      Image.network(
+                          'https://next-images.123rf.com/index/_next/image/?url=https://assets-cdn.123rf.com/index/static/assets/top-section-bg.jpeg&w=3840&q=75'),
+
                       CircleAvatar(
                         radius: 60,
                         backgroundColor: Colors.grey[300],

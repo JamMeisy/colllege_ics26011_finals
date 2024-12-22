@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:thomasian_post/screens/discover_events.dart';
-import 'package:thomasian_post/screens/my_events.dart';
+import 'package:thomasian_post/screens/events/discover_events.dart';
+import 'package:thomasian_post/screens/events/my_events.dart';
 import 'package:thomasian_post/screens/profile.dart';
 import 'package:thomasian_post/screens/about.dart';
 

@@ -1,44 +1,19 @@
-import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:thomasian_post/widgets/drawer.dart';
-import 'package:thomasian_post/services/login_status.dart';
-import 'package:thomasian_post/screens/view_event.dart';
+import 'package:thomasian_post/widgets/create_event_button.dart';
+import 'package:thomasian_post/screens/events/view_event.dart';
 
 class ViewEventList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Thomasian Posts'),
-      ),
-      drawer: MyDrawer(),
-      body: DoubleBackToCloseApp(
-        child: ApprovedEventList(),
-        snackBar: const SnackBar(
-          content: Text('Tap back again to leave'),
+        appBar: AppBar(
+          title: Text('Thomasian Posts'),
         ),
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () async {
-          await Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => LoginStatus(),
-            ),
-          );
-        },
-        label: Text(
-          'Book',
-          style: TextStyle(fontWeight: FontWeight.w600),
-        ),
-        icon: Icon(
-          Icons.add,
-          size: 25,
-        ),
-        backgroundColor: Theme.of(context).primaryColor,
-      ),
-    );
+        drawer: MyDrawer(),
+        body: ApprovedEventList(),
+        floatingActionButton: CreateEventButton());
   }
 }
 

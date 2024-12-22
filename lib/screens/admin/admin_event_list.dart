@@ -3,22 +3,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 import 'package:thomasian_post/widgets/drawer.dart';
-import 'package:thomasian_post/screens/my_events.dart';
+import 'package:thomasian_post/screens/events/my_events.dart';
 
 // For Admin View
-class ViewPendingEventList extends StatefulWidget {
+class AdminEventList extends StatefulWidget {
   final String eventId;
   final bool isAdmin;
 
-  const ViewPendingEventList(
-      {Key? key, required this.eventId, required this.isAdmin})
+  const AdminEventList({Key? key, required this.eventId, required this.isAdmin})
       : super(key: key);
 
   @override
-  _ViewPendingEventListState createState() => _ViewPendingEventListState();
+  _AdminEventListState createState() => _AdminEventListState();
 }
 
-class _ViewPendingEventListState extends State<ViewPendingEventList> {
+class _AdminEventListState extends State<AdminEventList> {
   late Map<String, dynamic> eventData;
 
   @override

@@ -1,9 +1,9 @@
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:thomasian_post/screens/create_event.dart';
+import 'package:thomasian_post/screens/events/create_event.dart';
 import 'package:thomasian_post/widgets/drawer.dart';
-import 'package:thomasian_post/screens/register.dart';
+import 'package:thomasian_post/screens/auth/signup.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -166,7 +166,7 @@ class _LoginPageState extends State<LoginPage> {
                       onPressed: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => RegisterPage(),
+                            builder: (context) => SignUpPage(),
                           )),
                       child: Text(
                         "Register Now",

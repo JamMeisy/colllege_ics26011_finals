@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:thomasian_post/screens/my_events.dart';
+import 'package:thomasian_post/screens/events/my_events.dart';
 import 'package:thomasian_post/screens/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'VenueBookingApp',
+      title: 'Thomasian Post',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         buttonTheme: ButtonThemeData(buttonColor: Colors.deepPurple),

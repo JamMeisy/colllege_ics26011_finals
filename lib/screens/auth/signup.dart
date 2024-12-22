@@ -1,19 +1,18 @@
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
-import 'package:thomasian_post/screens/create_event.dart';
-import 'package:thomasian_post/screens/my_events.dart';
+import 'package:thomasian_post/screens/events/my_events.dart';
 import 'package:thomasian_post/widgets/drawer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({Key? key});
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({Key? key});
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
@@ -70,7 +69,6 @@ class _RegisterPageState extends State<RegisterPage> {
 
       User? user = userCredential.user;
       if (user != null) {
-        // Store user data in Firestore
         await _storeUserInFirestore(emailController.text);
 
         ScaffoldMessenger.of(context).showSnackBar(
@@ -80,7 +78,6 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
         );
 
-        // Navigate to BookingPage
         Navigator.push(
           context,
           MaterialPageRoute(

@@ -1,10 +1,10 @@
-import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:thomasian_post/widgets/create_event_button.dart';
 import 'package:thomasian_post/widgets/drawer.dart';
-import 'package:thomasian_post/screens/admin_event_list.dart';
-import 'package:thomasian_post/services/login_status.dart';
+import 'package:thomasian_post/screens/admin/admin_event_list.dart';
+import 'package:thomasian_post/utils/color_utils.dart';
 
 class EventsPage extends StatefulWidget {
   const EventsPage({Key? key}) : super(key: key);
@@ -20,26 +20,6 @@ class _EventsPageState extends State<EventsPage> {
   List<DocumentSnapshot> bookings = [];
   bool isLoading = false;
   bool isAdmin = false;
-
-  Color _getStatusBorderColor(String? status) {
-    Color borderColor;
-
-    switch (status) {
-      case 'pending':
-        borderColor = Color(0xffffcc55); // Yellow
-        break;
-      case 'approved':
-        borderColor = Color(0xff50C878); // Green
-        break;
-      case 'declined':
-        borderColor = Color(0xffFF0505); // Red
-        break;
-      default:
-        borderColor = Colors.grey;
-    }
-
-    return borderColor;
-  }
 
   // Check if the user is admin
   Future<bool> _checkIfAdmin() async {
@@ -93,9 +73,7 @@ class _EventsPageState extends State<EventsPage> {
           bookings = querySnapshot.docs;
           isLoading = false;
         });
-
-      }
-      else {
+      } else {
         // Fetch user-specific bookings
         User? user = _auth.currentUser;
 
@@ -112,8 +90,7 @@ class _EventsPageState extends State<EventsPage> {
             bookings = querySnapshot.docs;
             isLoading = false;
           });
-        }
-        else {
+        } else {
           print('No user signed in.');
           // Clear the bookings list when no user is signed in
           setState(() {
@@ -122,8 +99,7 @@ class _EventsPageState extends State<EventsPage> {
           });
         }
       }
-    }
-    catch (e) {
+    } catch (e) {
       print('Error fetching bookings: $e');
       setState(() {
         isLoading = false;
@@ -144,8 +120,7 @@ class _EventsPageState extends State<EventsPage> {
         title: Text('My Events'),
       ),
       drawer: MyDrawer(),
-      body: DoubleBackToCloseApp(
-        child: SafeArea(
+      body: SafeArea(
           child: RefreshIndicator(
             onRefresh: _fetchBookings,
             child: ListView.builder(
@@ -232,6 +207,7 @@ class _EventsPageState extends State<EventsPage> {
 
                       return confirm;
                     },
+
                     background: Container(
                       color: Colors.red,
                       alignment: Alignment.centerRight,
@@ -247,7 +223,7 @@ class _EventsPageState extends State<EventsPage> {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => ViewPendingEventList(
+                              builder: (context) => AdminEventList(
                                 eventId: bookings[index].id,
                                 isAdmin: isAdmin,
                               ),
@@ -290,7 +266,7 @@ class _EventsPageState extends State<EventsPage> {
                               decoration: BoxDecoration(
                                 border: Border.all(
                                   color:
-                                      _getStatusBorderColor(booking['state']),
+                                      ColorUtils.getStatusBorderColor(booking['state']),
                                   width: 1,
                                 ),
                                 borderRadius: BorderRadius.circular(8.0),
@@ -300,7 +276,7 @@ class _EventsPageState extends State<EventsPage> {
                                 style: TextStyle(
                                   fontSize: 12,
                                   color:
-                                      _getStatusBorderColor(booking['state']),
+                                      ColorUtils.getStatusBorderColor(booking['state']),
                                 ),
                               ),
                             )
@@ -315,30 +291,7 @@ class _EventsPageState extends State<EventsPage> {
             ),
           ),
         ),
-        snackBar: SnackBar(
-          content: Text('Tap back again to leave'),
-        ),
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () async {
-          await Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => LoginStatus(),
-            ),
-          );
-          _fetchBookings();
-        },
-        label: Text(
-          'Book',
-          style: TextStyle(fontWeight: FontWeight.w600),
-        ),
-        icon: Icon(
-          Icons.add,
-          size: 25,
-        ),
-        backgroundColor: Theme.of(context).primaryColor,
-      ),
+      floatingActionButton: CreateEventButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
