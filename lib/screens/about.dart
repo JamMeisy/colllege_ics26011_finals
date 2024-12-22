@@ -15,7 +15,7 @@ class AboutPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'VenueBookingApp',
+              'Thomasian Post',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -23,7 +23,7 @@ class AboutPage extends StatelessWidget {
             ),
             SizedBox(height: 16),
             Text(
-              'VenueBookingApp is an application designed to help users book venues for various events. It provides a seamless experience for browsing, booking, and managing event venues.',
+              'Thomasian Post is a dedicated mobile app designed to keep the University of Santo Tomas (UST) community connected and informed. Catering to the unique needs of each college, the app centralizes all events, announcements, and updates across the university. From academic schedules to cultural festivities, Thomasian Post ensures that Thomasians never miss an important moment, fostering a stronger sense of community and engagement within UST.',
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 32),
@@ -36,15 +36,15 @@ class AboutPage extends StatelessWidget {
             ),
             SizedBox(height: 16),
             DeveloperInfo(
-              name: 'Developer 1',
+              name: 'Jam Meisy F. Tan',
               imageUrl: 'assets/images/developer1.png',
             ),
             DeveloperInfo(
-              name: 'Developer 2',
-              imageUrl: 'assets/images/developer2.png',
+              name: 'Wilmargherix M. Castañeda',
+              imageUrl: 'assets/profile/rix.jpg',
             ),
             DeveloperInfo(
-              name: 'Developer 3',
+              name: 'Raphael Angelo F. Dacayo',
               imageUrl: 'assets/images/developer3.png',
             ),
           ],

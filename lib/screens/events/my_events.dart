@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:thomasian_post/widgets/create_event_button.dart';
 import 'package:thomasian_post/widgets/drawer.dart';
 import 'package:thomasian_post/utils/color_utils.dart';
@@ -179,7 +178,7 @@ class _MyEventsPageState extends State<MyEventsPage> {
                       decoration: BoxDecoration(
                         color: Colors.white,
                         border: Border.all(
-                          color: Colors.deepPurple,
+                          color: Colors.black,
                           width: 1,
                         ),
                         borderRadius: BorderRadius.circular(10.0),

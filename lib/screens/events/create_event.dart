@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:thomasian_post/theme_constants.dart';
 import 'package:intl/intl.dart';
 import 'package:scroll_datetime_picker/scroll_datetime_picker.dart';
 import 'package:thomasian_post/widgets/drawer.dart';
@@ -222,18 +222,7 @@ class _CreateEventState extends State<CreateEvent> {
                 SizedBox(height: 8),
                 TextField(
                   controller: _eventNameController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    contentPadding: EdgeInsets.symmetric(
-                      vertical: 15.0,
-                      horizontal: 10.0,
-                    ),
-                    errorText: _isEventNameEmpty
-                        ? null
-                        : 'Please enter the event name',
-                  ),
+                  decoration: CustomTheme.getInputDecoration('Event Name'),
                 ),
                 SizedBox(height: 20),
                 Text(
@@ -549,18 +538,19 @@ class _CreateEventState extends State<CreateEvent> {
                   child: SizedBox(
                     width: 200,
                     child: ElevatedButton(
+                      style: CustomTheme.primaryButtonStyle,
                       onPressed: submitBooking,
-                      style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.symmetric(vertical: 10.0),
-                      ),
                       child: _isSubmitting
-                          ? CircularProgressIndicator(
-                              valueColor:
-                                  AlwaysStoppedAnimation<Color>(Colors.white),
-                              backgroundColor: Colors.deepPurpleAccent,
-                            )
+                          ? SizedBox(
+                        width: 24,
+                        height: 24,
+                        child: CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(CustomTheme.accentBlack),
+                          strokeWidth: 2,
+                        ),
+                      )
                           : Text('Submit'),
-                    ),
+                    )
                   ),
                 ),
                 Center(
