@@ -60,11 +60,9 @@ class _LoginPageState extends State<LoginPage> {
         password: passwordController.text,
       );
 
-      // User signed in successfully
       User? user = userCredential.user;
       if (user != null && _isMounted) {
         _showSnackBar('Signed in as ${user.email}');
-
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -83,23 +81,22 @@ class _LoginPageState extends State<LoginPage> {
         _showSnackBar('Error during sign-in: ${e.message}');
       }
     } catch (error) {
-      print('Email/Password Sign-In Error: $error');
       _showSnackBar('Error during sign-in');
     } finally {
       if (_isMounted) {
         setState(() {
-          _loading = false; // Reset loading state for email/password sign-in
+          _loading = false;
         });
       }
     }
   }
 
-  // TODO: Design Here
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: Text('Login', style: TextStyle(color: Color(0xFFFFD700))),
+        backgroundColor: Colors.black,
       ),
       drawer: MyDrawer(),
       body: Center(
@@ -111,33 +108,37 @@ class _LoginPageState extends State<LoginPage> {
               Text(
                 "Log in",
                 style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 25,
-                    color: Colors.deepPurple),
+                  fontWeight: FontWeight.w500,
+                  fontSize: 25,
+                  color: Color(0xFFFFD700),
+                ),
               ),
-              SizedBox(
-                height: 15,
-              ),
+              SizedBox(height: 15),
               TextField(
                 controller: usernameController,
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(12))),
-                    hintText: 'Username',
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 15, vertical: 10)),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(12)),
+                  ),
+                  hintText: 'Username',
+                  contentPadding:
+                  EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  fillColor: Color(0xFFFFF8DC),
+                  filled: true,
+                ),
               ),
-              SizedBox(
-                height: 12,
-              ),
+              SizedBox(height: 12),
               TextFormField(
                 controller: passwordController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(12))),
+                    borderRadius: BorderRadius.all(Radius.circular(12)),
+                  ),
                   hintText: 'Password',
                   contentPadding:
-                      EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  fillColor: Color(0xFFFFF8DC),
+                  filled: true,
                   suffixIcon: GestureDetector(
                     onTap: () {
                       setState(() {
@@ -148,63 +149,64 @@ class _LoginPageState extends State<LoginPage> {
                       _obscurePassword
                           ? Icons.visibility
                           : Icons.visibility_off,
+                      color: Color(0xFF1A1A1A),
                     ),
                   ),
                 ),
                 obscureText: _obscurePassword,
               ),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextButton(
                     onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SignUpPage(),
-                        )),
+                      context,
+                      MaterialPageRoute(builder: (context) => SignUpPage()),
+                    ),
                     child: Text(
                       "Sign up",
-                      style: TextStyle(fontSize: 16),
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Color(0xFFFFB900),
+                      ),
                     ),
                   ),
                   ElevatedButton(
                     onPressed: _signInWithEmailAndPassword,
                     style: ButtonStyle(
-                      shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                      backgroundColor:
+                      MaterialStateProperty.all<Color>(Color(0xFFFFC000)),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12.0),
                         ),
                       ),
-                      backgroundColor:
-                          WidgetStateProperty.all<Color>(Colors.deepPurple),
                     ),
                     child: Padding(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                      EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                       child: _loading
                           ? SizedBox(
-                              width: 20,
-                              height: 20,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  Colors.white,
-                                ),
-                              ),
-                            )
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            Colors.white,
+                          ),
+                        ),
+                      )
                           : Text(
-                              "Log in",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16,
-                              ),
-                            ),
+                        "Log in",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                        ),
+                      ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ],

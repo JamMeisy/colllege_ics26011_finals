@@ -16,7 +16,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
-      TextEditingController();
+  TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   bool _loading = false;
@@ -62,7 +62,7 @@ class _SignUpPageState extends State<SignUpPage> {
       });
 
       UserCredential userCredential =
-          await _auth.createUserWithEmailAndPassword(
+      await _auth.createUserWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
       );
@@ -140,7 +140,11 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sign Up'),
+        title: Text(
+          'Sign Up',
+          style: TextStyle(color: Color(0xFFFFD700)), // Primary Yellow
+        ),
+        backgroundColor: Color(0xFF1A1A1A), // Accent Black
       ),
       drawer: MyDrawer(),
       body: DoubleBackToCloseApp(
@@ -153,13 +157,12 @@ class _SignUpPageState extends State<SignUpPage> {
                 Text(
                   "Sign Up to Thomasian Post",
                   style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 25,
-                      color: Colors.deepPurple),
+                    fontWeight: FontWeight.w500,
+                    fontSize: 25,
+                    color: Color(0xFFFFD700), // Primary Yellow
+                  ),
                 ),
-                SizedBox(
-                  height: 15,
-                ),
+                SizedBox(height: 15),
                 TextField(
                   keyboardType: TextInputType.emailAddress,
                   controller: emailController,
@@ -169,13 +172,11 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     hintText: 'E-mail',
                     contentPadding:
-                        EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                    EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                     errorText: _emailError.isNotEmpty ? _emailError : null,
                   ),
                 ),
-                SizedBox(
-                  height: 15,
-                ),
+                SizedBox(height: 15),
                 TextField(
                   keyboardType: TextInputType.visiblePassword,
                   controller: passwordController,
@@ -185,14 +186,12 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     hintText: 'Password',
                     contentPadding:
-                        EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                    EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                     errorText:
-                        _passwordError.isNotEmpty ? _passwordError : null,
+                    _passwordError.isNotEmpty ? _passwordError : null,
                   ),
                 ),
-                SizedBox(
-                  height: 15,
-                ),
+                SizedBox(height: 15),
                 TextField(
                   controller: confirmPasswordController,
                   decoration: InputDecoration(
@@ -201,15 +200,13 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     hintText: 'Confirm password',
                     contentPadding:
-                        EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                    EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                     errorText: _confirmPasswordError.isNotEmpty
                         ? _confirmPasswordError
                         : null,
                   ),
                 ),
-                SizedBox(
-                  height: 15,
-                ),
+                SizedBox(height: 15),
                 ElevatedButton(
                   onPressed: _signUp,
                   style: ButtonStyle(
@@ -219,29 +216,29 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                     ),
                     backgroundColor:
-                        WidgetStateProperty.all<Color>(Colors.deepPurple),
+                    WidgetStateProperty.all<Color>(Color(0xFFFFD700)), // Primary Yellow
                   ),
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                     child: _loading
                         ? SizedBox(
-                            width: 20,
-                            height: 20,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2,
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                Colors.white,
-                              ),
-                            ),
-                          )
+                      width: 20,
+                      height: 20,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          Colors.white,
+                        ),
+                      ),
+                    )
                         : Text(
-                            "Sign Up",
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 15,
-                              color: Colors.white,
-                            ),
-                          ),
+                      "Sign Up",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 15,
+                        color: Colors.black, // Dark color for text
+                      ),
+                    ),
                   ),
                 ),
               ],

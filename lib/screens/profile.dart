@@ -31,8 +31,7 @@ class _ProfilePageState extends State<ProfilePage> {
         user = _auth.currentUser;
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text('Failed to reload user data: ${e.toString()}')),
+          SnackBar(content: Text('Failed to reload user data: ${e.toString()}')),
         );
       }
     }
@@ -68,6 +67,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profile'),
+        backgroundColor: const Color(0xFF1A1A1A), // accentBlack
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
@@ -76,6 +76,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 _userFuture = _reloadUser();
               });
             },
+            color: const Color(0xFFFFD700), // primaryYellow
           ),
         ],
       ),
@@ -123,6 +124,9 @@ class _ProfilePageState extends State<ProfilePage> {
                         );
                       },
                       child: const Text('Login'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFFFFC000), // darkYellow
+                      ),
                     ),
                   ],
                 );
@@ -141,32 +145,30 @@ class _ProfilePageState extends State<ProfilePage> {
                           children: [
                             CircleAvatar(
                               radius: 60,
-                              backgroundColor: Theme.of(context)
-                                  .primaryColor
-                                  .withOpacity(0.1),
+                              backgroundColor: const Color(0xFFFFF8DC), // lightYellow
                               child: user.photoURL != null
                                   ? ClipOval(
-                                      child: Image.network(
-                                        user.photoURL!,
-                                        width: 120,
-                                        height: 120,
-                                        fit: BoxFit.cover,
-                                        errorBuilder: (_, __, ___) => Icon(
-                                          Icons.person,
-                                          size: 60,
-                                          color: Theme.of(context).primaryColor,
-                                        ),
-                                      ),
-                                    )
+                                child: Image.network(
+                                  user.photoURL!,
+                                  width: 120,
+                                  height: 120,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (_, __, ___) => Icon(
+                                    Icons.person,
+                                    size: 60,
+                                    color: const Color(0xFFFFD700), // primaryYellow
+                                  ),
+                                ),
+                              )
                                   : Icon(
-                                      Icons.person,
-                                      size: 60,
-                                      color: Theme.of(context).primaryColor,
-                                    ),
+                                Icons.person,
+                                size: 60,
+                                color: const Color(0xFFFFD700), // primaryYellow
+                              ),
                             ),
                             CircleAvatar(
                               radius: 18,
-                              backgroundColor: Theme.of(context).primaryColor,
+                              backgroundColor: const Color(0xFFFFD700), // primaryYellow
                               child: IconButton(
                                 icon: const Icon(Icons.edit, size: 16),
                                 color: Colors.white,
@@ -188,13 +190,14 @@ class _ProfilePageState extends State<ProfilePage> {
                           style: const TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
+                            color: Color(0xFF1A1A1A), // accentBlack
                           ),
                         ),
                         Text(
                           user.email ?? '',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 16,
-                            color: Theme.of(context).textTheme.bodySmall?.color,
+                            color: Color(0xFF1A1A1A), // accentBlack
                           ),
                         ),
                         const SizedBox(height: 32),
@@ -237,19 +240,25 @@ class _ProfilePageState extends State<ProfilePage> {
                         _isLoading
                             ? const CircularProgressIndicator()
                             : ElevatedButton.icon(
-                                icon: const Icon(Icons.logout),
-                                label: const Text('Sign Out'),
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.red,
-                                  foregroundColor: Colors.white,
-                                  minimumSize: const Size(200, 45),
-                                ),
-                                onPressed: _handleSignOut,
-                              ),
+                          icon: const Icon(Icons.logout),
+                          label: const Text('Sign Out'),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFFDC143C), // rejectedColor
+                            foregroundColor: Colors.white,
+                            minimumSize: const Size(200, 45),
+                          ),
+                          onPressed: _handleSignOut,
+                        ),
                         const SizedBox(height: 16),
                         TextButton.icon(
-                          icon: const Icon(Icons.home),
-                          label: const Text('Back to Home'),
+                          icon: const Icon(
+                            Icons.home,
+                            color: Color(0xFFFFD700), // primaryYellow
+                          ),
+                          label: const Text(
+                            'Go to Home',
+                            style: TextStyle(color: Color(0xFF1A1A1A)), // accentBlack
+                          ),
                           onPressed: () {
                             Navigator.pushReplacement(
                               context,
@@ -258,6 +267,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             );
                           },
                         ),
+
                       ],
                     ),
                   ),
@@ -287,10 +297,14 @@ class _ProfileButton extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: OutlinedButton.icon(
-        icon: Icon(icon),
-        label: Text(label),
+        icon: Icon(icon, color: const Color(0xFFFFD700)), // primaryYellow
+        label: Text(
+          label,
+          style: const TextStyle(color: Color(0xFF1A1A1A)), // accentBlack
+        ),
         style: OutlinedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+          backgroundColor: const Color(0xFFFFF8DC), // lightYellow
           alignment: Alignment.centerLeft,
         ),
         onPressed: onPressed,
