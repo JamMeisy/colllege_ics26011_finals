@@ -157,12 +157,12 @@ class _CreateEventState extends State<CreateEvent> {
                 children: [
                   Text(
                     'Event Name',
-                    style: TextStyle(fontSize: 12, color: Colors.deepPurple),
+                    style: TextStyle(fontSize: 12, color: Colors.black),
                   ),
                   SizedBox(height: 8),
                   TextFormField(
                     controller: _eventNameController,
-                    decoration: CustomTheme.getInputDecoration('Event Name'),
+                    decoration: CustomTheme.getInputDecoration(),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter the event name';
@@ -171,10 +171,8 @@ class _CreateEventState extends State<CreateEvent> {
                     },
                   ),
                   SizedBox(height: 20),
-                  Text(
-                    'Event Description',
-                    style: TextStyle(fontSize: 12, color: Colors.deepPurple),
-                  ),
+                  Text('Event Description',
+                      style: TextStyle(fontSize: 12, color: Colors.black)),
                   SizedBox(height: 8),
                   TextFormField(
                     controller: _eventDescriptionController,
@@ -201,8 +199,7 @@ class _CreateEventState extends State<CreateEvent> {
                     children: [
                       Text(
                         'Date',
-                        style:
-                            TextStyle(fontSize: 12, color: Colors.deepPurple),
+                        style: TextStyle(fontSize: 12, color: Colors.black),
                       ),
                       SizedBox(height: 8),
                       GestureDetector(
@@ -224,10 +221,9 @@ class _CreateEventState extends State<CreateEvent> {
                           child: Text(
                             '${DateFormat('MMM dd, yyyy').format(selectedDate)}',
                             style: TextStyle(
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.deepPurple,
-                            ),
+                                fontSize: 15.0,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black),
                           ),
                         ),
                       ),
@@ -257,11 +253,9 @@ class _CreateEventState extends State<CreateEvent> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'Start Time',
-                              style: TextStyle(
-                                  fontSize: 12, color: Colors.deepPurple),
-                            ),
+                            Text('Start Time',
+                                style: TextStyle(
+                                    fontSize: 12, color: Colors.black)),
                             SizedBox(height: 8),
                             GestureDetector(
                               onTap: () {
@@ -282,10 +276,9 @@ class _CreateEventState extends State<CreateEvent> {
                                 child: Text(
                                   '${selectedTime.format(context)}',
                                   style: TextStyle(
-                                    fontSize: 15.0,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.deepPurple,
-                                  ),
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black),
                                 ),
                               ),
                             ),
@@ -297,11 +290,9 @@ class _CreateEventState extends State<CreateEvent> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'End Time',
-                              style: TextStyle(
-                                  fontSize: 12, color: Colors.deepPurple),
-                            ),
+                            Text('End Time',
+                                style: TextStyle(
+                                    fontSize: 12, color: Colors.black)),
                             SizedBox(height: 8),
                             GestureDetector(
                               onTap: () {
@@ -322,10 +313,9 @@ class _CreateEventState extends State<CreateEvent> {
                                 child: Text(
                                   '${endTime.format(context)}',
                                   style: TextStyle(
-                                    fontSize: 15.0,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.deepPurple,
-                                  ),
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black),
                                 ),
                               ),
                             ),
@@ -394,10 +384,8 @@ class _CreateEventState extends State<CreateEvent> {
                         }),
                       ),
                     ),
-                  Text(
-                    'Venue',
-                    style: TextStyle(fontSize: 12, color: Colors.deepPurple),
-                  ),
+                  Text('Venue',
+                      style: TextStyle(fontSize: 12, color: Colors.black)),
                   SizedBox(height: 8),
                   TextFormField(
                     controller: _venueController,
@@ -418,10 +406,8 @@ class _CreateEventState extends State<CreateEvent> {
                     },
                   ),
                   SizedBox(height: 20),
-                  Text(
-                    'Link to Register',
-                    style: TextStyle(fontSize: 12, color: Colors.deepPurple),
-                  ),
+                  Text('Link to Register',
+                      style: TextStyle(fontSize: 12, color: Colors.black)),
                   SizedBox(height: 8),
                   TextFormField(
                     controller: _registerLinkController,
@@ -436,10 +422,8 @@ class _CreateEventState extends State<CreateEvent> {
                     ),
                   ),
                   SizedBox(height: 20),
-                  Text(
-                    'Event Image Link',
-                    style: TextStyle(fontSize: 12, color: Colors.deepPurple),
-                  ),
+                  Text('Event Image Link',
+                      style: TextStyle(fontSize: 12, color: Colors.black)),
                   SizedBox(height: 8),
                   TextFormField(
                     controller: _imageLinkController,
@@ -466,7 +450,7 @@ class _CreateEventState extends State<CreateEvent> {
                             ? CircularProgressIndicator(
                                 valueColor:
                                     AlwaysStoppedAnimation<Color>(Colors.white),
-                                backgroundColor: Colors.deepPurpleAccent,
+                                backgroundColor: Colors.yellowAccent,
                               )
                             : Text('Submit'),
                       ),
@@ -482,7 +466,8 @@ class _CreateEventState extends State<CreateEvent> {
                           ),
                         );
                       },
-                      child: Text('Go Back to My Events'),
+                      child: Text('Go Back to My Events',
+                          style: TextStyle(fontSize: 12, color: Colors.black)),
                     ),
                   ),
                 ],

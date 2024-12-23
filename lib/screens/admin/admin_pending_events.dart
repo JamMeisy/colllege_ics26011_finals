@@ -172,7 +172,7 @@ class _PendingEventsPageState extends State<PendingEventsPage> {
                       ),
                       child: Column(
                         children: [
-                          data['imageURL'] != null
+                          data['imageURL'] != null && data['imageURL'] != ''
                               ? Image.network(
                                   data['imageURL'],
                                   height: 150,

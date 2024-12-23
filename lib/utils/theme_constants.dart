@@ -38,9 +38,8 @@ class CustomTheme {
   );
 
   // Input Decoration
-  static InputDecoration getInputDecoration(String hintText) {
+  static InputDecoration getInputDecoration() {
     return InputDecoration(
-      hintText: hintText,
       filled: true,
       fillColor: Colors.white,
       border: OutlineInputBorder(
@@ -130,78 +129,77 @@ class CustomTheme {
 }
 
 class AppTheme {
-  static const Color primary = Color(0xFFFFD700);      // Bright yellow
-  static const Color secondary = Color(0xFF000000);    // Black
-  static const Color accent = Color(0xFFFFC107);       // Amber
-  static const Color background = Color(0xFFFFFDF4);   // Light cream
-  static const Color surface = Color(0xFFFFFFFF);      // White
-  static const Color error = Color(0xFFD32F2F);        // Error red
-  static const Color textPrimary = Color(0xFF000000);  // Black text
-  static const Color textSecondary = Color(0xFF666666);// Gray text
+  static const Color primary = Color(0xFFFFD700); // Bright yellow
+  static const Color secondary = Color(0xFF000000); // Black
+  static const Color accent = Color(0xFFFFC107); // Amber
+  static const Color background = Color(0xFFFFFDF4); // Light cream
+  static const Color surface = Color(0xFFFFFFFF); // White
+  static const Color error = Color(0xFFD32F2F); // Error red
+  static const Color textPrimary = Color(0xFF000000); // Black text
+  static const Color textSecondary = Color(0xFF666666); // Gray text
 
   static ThemeData get theme => ThemeData(
-    primaryColor: primary,
-    scaffoldBackgroundColor: background,
-    colorScheme: ColorScheme.light(
-      primary: primary,
-      secondary: secondary,
-      background: background,
-      surface: surface,
-      error: error,
-    ),
-    appBarTheme: AppBarTheme(
-      backgroundColor: primary,
-      foregroundColor: secondary,
-      elevation: 0,
-      centerTitle: true,
-      titleTextStyle: TextStyle(
-        color: secondary,
-        fontSize: 20,
-        fontWeight: FontWeight.bold,
-      ),
-    ),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: secondary,
-        foregroundColor: primary,
-        elevation: 2,
-        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+        primaryColor: primary,
+        scaffoldBackgroundColor: background,
+        colorScheme: ColorScheme.light(
+          primary: primary,
+          secondary: secondary,
+          surface: surface,
+          error: error,
         ),
-      ),
-    ),
-    inputDecorationTheme: InputDecorationTheme(
-      filled: true,
-      fillColor: surface,
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: secondary),
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: secondary.withOpacity(0.3)),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: secondary, width: 2),
-      ),
-      errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: error),
-      ),
-      contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-      hintStyle: TextStyle(color: textSecondary),
-    ),
-    cardTheme: CardTheme(
-      elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-        side: BorderSide(color: primary, width: 1),
-      ),
-      color: surface,
-    ),
-  );
+        appBarTheme: AppBarTheme(
+          backgroundColor: primary,
+          foregroundColor: secondary,
+          elevation: 0,
+          centerTitle: true,
+          titleTextStyle: TextStyle(
+            color: secondary,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: secondary,
+            foregroundColor: primary,
+            elevation: 2,
+            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          filled: true,
+          fillColor: surface,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(color: secondary),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(color: secondary.withOpacity(0.3)),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(color: secondary, width: 2),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(color: error),
+          ),
+          contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+          hintStyle: TextStyle(color: textSecondary),
+        ),
+        cardTheme: CardTheme(
+          elevation: 2,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+            side: BorderSide(color: primary, width: 1),
+          ),
+          color: surface,
+        ),
+      );
 
   static Widget loadingIndicator({Color? color}) {
     return CircularProgressIndicator(
@@ -263,21 +261,21 @@ class CustomButton extends StatelessWidget {
   Widget _buttonChild() {
     return loading
         ? SizedBox(
-      width: 20,
-      height: 20,
-      child: CircularProgressIndicator(
-        strokeWidth: 2,
-        valueColor: AlwaysStoppedAnimation<Color>(
-          outlined ? AppTheme.secondary : AppTheme.primary,
-        ),
-      ),
-    )
+            width: 20,
+            height: 20,
+            child: CircularProgressIndicator(
+              strokeWidth: 2,
+              valueColor: AlwaysStoppedAnimation<Color>(
+                outlined ? AppTheme.secondary : AppTheme.primary,
+              ),
+            ),
+          )
         : Text(
-      text,
-      style: TextStyle(
-        fontWeight: FontWeight.w600,
-        fontSize: 16,
-      ),
-    );
+            text,
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 16,
+            ),
+          );
   }
 }

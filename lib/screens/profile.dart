@@ -31,7 +31,8 @@ class _ProfilePageState extends State<ProfilePage> {
         user = _auth.currentUser;
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to reload user data: ${e.toString()}')),
+          SnackBar(
+              content: Text('Failed to reload user data: ${e.toString()}')),
         );
       }
     }
@@ -68,17 +69,6 @@ class _ProfilePageState extends State<ProfilePage> {
       appBar: AppBar(
         title: const Text('Profile'),
         backgroundColor: const Color(0xFF1A1A1A), // accentBlack
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: () {
-              setState(() {
-                _userFuture = _reloadUser();
-              });
-            },
-            color: const Color(0xFFFFD700), // primaryYellow
-          ),
-        ],
       ),
       drawer: const MyDrawer(),
       body: SafeArea(
@@ -145,30 +135,34 @@ class _ProfilePageState extends State<ProfilePage> {
                           children: [
                             CircleAvatar(
                               radius: 60,
-                              backgroundColor: const Color(0xFFFFF8DC), // lightYellow
+                              backgroundColor:
+                                  const Color(0xFFFFF8DC), // lightYellow
                               child: user.photoURL != null
                                   ? ClipOval(
-                                child: Image.network(
-                                  user.photoURL!,
-                                  width: 120,
-                                  height: 120,
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (_, __, ___) => Icon(
-                                    Icons.person,
-                                    size: 60,
-                                    color: const Color(0xFFFFD700), // primaryYellow
-                                  ),
-                                ),
-                              )
+                                      child: Image.network(
+                                        user.photoURL!,
+                                        width: 120,
+                                        height: 120,
+                                        fit: BoxFit.cover,
+                                        errorBuilder: (_, __, ___) => Icon(
+                                          Icons.person,
+                                          size: 60,
+                                          color: const Color(
+                                              0xFFFFD700), // primaryYellow
+                                        ),
+                                      ),
+                                    )
                                   : Icon(
-                                Icons.person,
-                                size: 60,
-                                color: const Color(0xFFFFD700), // primaryYellow
-                              ),
+                                      Icons.person,
+                                      size: 60,
+                                      color: const Color(
+                                          0xFFFFD700), // primaryYellow
+                                    ),
                             ),
                             CircleAvatar(
                               radius: 18,
-                              backgroundColor: const Color(0xFFFFD700), // primaryYellow
+                              backgroundColor:
+                                  const Color(0xFFFFD700), // primaryYellow
                               child: IconButton(
                                 icon: const Icon(Icons.edit, size: 16),
                                 color: Colors.white,
@@ -240,15 +234,16 @@ class _ProfilePageState extends State<ProfilePage> {
                         _isLoading
                             ? const CircularProgressIndicator()
                             : ElevatedButton.icon(
-                          icon: const Icon(Icons.logout),
-                          label: const Text('Sign Out'),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFFDC143C), // rejectedColor
-                            foregroundColor: Colors.white,
-                            minimumSize: const Size(200, 45),
-                          ),
-                          onPressed: _handleSignOut,
-                        ),
+                                icon: const Icon(Icons.logout),
+                                label: const Text('Sign Out'),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor:
+                                      const Color(0xFFDC143C), // rejectedColor
+                                  foregroundColor: Colors.white,
+                                  minimumSize: const Size(200, 45),
+                                ),
+                                onPressed: _handleSignOut,
+                              ),
                         const SizedBox(height: 16),
                         TextButton.icon(
                           icon: const Icon(
@@ -257,7 +252,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           label: const Text(
                             'Go to Home',
-                            style: TextStyle(color: Color(0xFF1A1A1A)), // accentBlack
+                            style: TextStyle(
+                                color: Color(0xFF1A1A1A)), // accentBlack
                           ),
                           onPressed: () {
                             Navigator.pushReplacement(
@@ -267,7 +263,6 @@ class _ProfilePageState extends State<ProfilePage> {
                             );
                           },
                         ),
-
                       ],
                     ),
                   ),

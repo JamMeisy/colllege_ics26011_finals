@@ -99,7 +99,8 @@ class _AdminViewEventState extends State<AdminViewEvent> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Check if imageUrl is not null before displaying the image
-                    if (eventData['imageURL'] != null)
+                    if (eventData['imageURL'] != null &&
+                        eventData['imageURL'] != '')
                       GestureDetector(
                         onTap: () {
                           Navigator.push(
@@ -192,7 +193,7 @@ class _AdminViewEventState extends State<AdminViewEvent> {
                                     borderRadius: BorderRadius.circular(
                                       25.0,
                                     ),
-                                    side: BorderSide(color: Colors.deepPurple)
+                                    side: BorderSide(color: Color(0xFFFFD700))
                                     // Adjust the radius as needed
                                     ),
                               ),
@@ -209,7 +210,8 @@ class _AdminViewEventState extends State<AdminViewEvent> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Icon(Icons.check, color: Colors.green),
-                                    Text("  Accept"),
+                                    Text("  Accept",
+                                        style: TextStyle(color: Colors.black)),
                                   ],
                                 ),
                               ),
@@ -224,7 +226,7 @@ class _AdminViewEventState extends State<AdminViewEvent> {
                                     borderRadius: BorderRadius.circular(
                                       25.0,
                                     ),
-                                    side: BorderSide(color: Colors.deepPurple)
+                                    side: BorderSide(color: Color(0xFFFFD700))
                                     // Adjust the radius as needed
                                     ),
                               ),
@@ -242,7 +244,8 @@ class _AdminViewEventState extends State<AdminViewEvent> {
                                   children: [
                                     Icon(Icons.close_rounded,
                                         color: Colors.red),
-                                    Text("  Reject"),
+                                    Text("  Reject",
+                                        style: TextStyle(color: Colors.black)),
                                   ],
                                 ),
                               ),
@@ -268,7 +271,8 @@ class _AdminViewEventState extends State<AdminViewEvent> {
                                     Icon(
                                       Icons.keyboard_arrow_left,
                                     ),
-                                    Text("  Go Back"),
+                                    Text("  Go Back",
+                                        style: TextStyle(color: Colors.black)),
                                   ],
                                 ),
                               ),

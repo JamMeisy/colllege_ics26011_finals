@@ -186,7 +186,7 @@ class _MyEventsPageState extends State<MyEventsPage> {
                       ),
                       child: Column(
                         children: [
-                          data['imageURL'] != null
+                          data['imageURL'] != null && data['imageURL'] != ''
                               ? Image.network(
                                   data['imageURL'],
                                   height: 150,

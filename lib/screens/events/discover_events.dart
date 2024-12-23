@@ -134,6 +134,7 @@ class ApprovedEventList extends StatelessWidget {
               return Hero(
                 tag: 'event-${documents[index].id}',
                 child: Card(
+                  color: AppColors.cardBackground,
                   elevation: 2,
                   margin: EdgeInsets.symmetric(vertical: 8.0),
                   shape: RoundedRectangleBorder(
@@ -166,7 +167,7 @@ class ApprovedEventList extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          data['imageURL'] != null
+                          data['imageURL'] != null && data['imageURL'] != ''
                               ? Image.network(
                                   data['imageURL'],
                                   height: 150,

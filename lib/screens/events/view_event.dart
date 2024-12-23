@@ -91,55 +91,48 @@ class ViewEvent extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 8.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    margin: EdgeInsets.all(8.0),
-                    padding: EdgeInsets.all(16.0),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                        color: Colors.deepPurple,
-                        width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    child: Text(
-                      '${date ?? ''}',
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(8.0),
-                    padding: EdgeInsets.all(16.0),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                        color: Colors.deepPurple,
-                        width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    child: Text(
-                      '${venue ?? ''}',
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 20),
               Center(
-                child: Text(
-                  '${time ?? ''}',
-                  style: TextStyle(fontSize: 16, color: Colors.deepPurple),
+                child: Container(
+                  margin: EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(16.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(
+                      color: Color(0xFFFFD700),
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Text(
+                    '${date ?? ''}\n'
+                    '${time ?? ''}',
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              Center(
+                child: Container(
+                  margin: EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(16.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(
+                      color: Color(0xFFFFD700),
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Text(
+                    '${venue ?? ''}',
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
                 ),
               ),
               SizedBox(
@@ -156,7 +149,7 @@ class ViewEvent extends StatelessWidget {
                     } // Add logic to navigate to the register link
                   },
                   child: Text(
-                    'Register Now',
+                    'Link to Event',
                     style: TextStyle(fontSize: 16),
                   ),
                 ),

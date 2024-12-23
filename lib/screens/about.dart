@@ -17,26 +17,12 @@ class AboutPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Center(
-                child: Column(
-                  children: [
-                    Icon(
-                      Icons.school,
-                      size: 80,
-                      color: Colors.amber,
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      'Thomasian Post',
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black87,
-                      ),
-                    ),
-                  ],
+                child: Image.asset(
+                  'assets/icons/logo.png',
+                  width: 250, // Adjust the width as needed
+                  height: 250, // Adjust the height as needed
                 ),
               ),
-              SizedBox(height: 24),
               Text(
                 'Thomasian Post is your one-stop hub for everything UST! From academic updates to cultural events, our app is designed to keep every Thomasian informed and connected. Whether you want to check the latest announcements or stay on top of your schedule, Thomasian Post ensures you never miss a beat. Experience a stronger sense of community with every tap.',
                 style: TextStyle(
