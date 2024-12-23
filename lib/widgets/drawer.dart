@@ -25,79 +25,82 @@ class MyDrawer extends StatelessWidget {
         } else {
           bool isAdmin = snapshot.data ?? false;
           return Drawer(
-            child: ListView(
-              children: [
-                SizedBox(
-                  height: 50,
-                ),
-                ListTile(
-                  leading: Icon(
-                    Icons.home,
-                    color: Colors.deepPurple,
-                    size: 24,
+            child: Container(
+              color: Color(0xFF1A1A1A), // Set background color to black
+              child: ListView(
+                children: [
+                  SizedBox(
+                    height: 50,
                   ),
-                  title: Text(
-                    'Discover',
-                    style: TextStyle(fontSize: 18),
-                  ),
-                  onTap: () => Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => ViewEventList())),
-                ),
-                ListTile(
-                  leading: Icon(
-                    Icons.bookmarks,
-                    color: Colors.deepPurple,
-                    size: 22,
-                  ),
-                  title: Text(
-                    'My Events',
-                    style: TextStyle(fontSize: 18),
-                  ),
-                  onTap: () => Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => MyEventsPage())),
-                ),
-                if (isAdmin)
                   ListTile(
                     leading: Icon(
-                      Icons.pending,
-                      color: Colors.deepPurple,
+                      Icons.home,
+                      color: Color(0xFFFFD700),
                       size: 24,
                     ),
                     title: Text(
-                      'Pending Events',
-                      style: TextStyle(fontSize: 18),
+                      'Discover',
+                      style: TextStyle(fontSize: 18, color: Color(0xFFFFC000)),
                     ),
                     onTap: () => Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                            builder: (context) => PendingEventsPage())),
+                        MaterialPageRoute(builder: (context) => ViewEventList())),
                   ),
-                ListTile(
-                  leading: Icon(
-                    Icons.person,
-                    color: Colors.deepPurple,
-                    size: 24,
+                  ListTile(
+                    leading: Icon(
+                      Icons.bookmarks,
+                      color: Color(0xFFFFD700),
+                      size: 22,
+                    ),
+                    title: Text(
+                      'My Events',
+                      style: TextStyle(fontSize: 18, color: Color(0xFFFFC000)),
+                    ),
+                    onTap: () => Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => MyEventsPage())),
                   ),
-                  title: Text(
-                    'Profile',
-                    style: TextStyle(fontSize: 18),
+                  if (isAdmin)
+                    ListTile(
+                      leading: Icon(
+                        Icons.pending,
+                        color: Color(0xFFFFD700),
+                        size: 24,
+                      ),
+                      title: Text(
+                        'Pending Events',
+                        style: TextStyle(fontSize: 18, color: Color(0xFFFFC000)),
+                      ),
+                      onTap: () => Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                              builder: (context) => PendingEventsPage())),
+                    ),
+                  ListTile(
+                    leading: Icon(
+                      Icons.person,
+                      color: Color(0xFFFFD700),
+                      size: 24,
+                    ),
+                    title: Text(
+                      'Profile',
+                      style: TextStyle(fontSize: 18, color: Color(0xFFFFC000)),
+                    ),
+                    onTap: () => Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => ProfilePage())),
                   ),
-                  onTap: () => Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => ProfilePage())),
-                ),
-                ListTile(
-                  leading: Icon(
-                    Icons.info,
-                    color: Colors.deepPurple,
-                    size: 24,
+                  ListTile(
+                    leading: Icon(
+                      Icons.info,
+                      color: Color(0xFFFFD700),
+                      size: 24,
+                    ),
+                    title: Text(
+                      'About',
+                      style: TextStyle(fontSize: 18, color: Color(0xFFFFC000)),
+                    ),
+                    onTap: () => Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => AboutPage())),
                   ),
-                  title: Text(
-                    'About',
-                    style: TextStyle(fontSize: 18),
-                  ),
-                  onTap: () => Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => AboutPage())),
-                ),
-              ],
+                ],
+              ),
             ),
           );
         }
